@@ -407,11 +407,8 @@
       const decoder = new TextDecoder("utf-8");
       let first = true;
 
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        if (!chunk) continue;
+      function appendChunk(chunk) {
+        if (!chunk) return;
         if (first) {
           typingEl.remove();
           assistantEl = document.createElement("div");
@@ -423,6 +420,13 @@
         assistantEl.innerHTML = renderAnswer(acc);
         scrollToBottom();
       }
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        appendChunk(decoder.decode(value, { stream: true }));
+      }
+      appendChunk(decoder.decode()); // flush trailing multi-byte tail
 
       if (first) {
         typingEl.remove();
