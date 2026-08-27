@@ -33,7 +33,7 @@
     padding: 0;
     background: var(--bg);
     color: var(--text);
-    height: 100%;
+    min-height: 100vh;
   }
 
   body {
@@ -46,12 +46,12 @@
     position: relative;
     overflow-x: hidden;
     background-image: 
-      radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.22) 0%, transparent 45%),
-      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.18) 0%, transparent 45%),
-      radial-gradient(circle at 50% 30%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+      radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.2) 0%, transparent 45%),
+      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 45%),
+      radial-gradient(circle at 50% 30%, rgba(236, 72, 153, 0.12) 0%, transparent 50%);
   }
 
-  /* Background Floating AI Icons */
+  /* Floating Background AI Icons */
   .bg-icons {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -63,24 +63,24 @@
     position: absolute;
     font-size: 0.85rem;
     font-weight: 700;
-    padding: 7px 16px;
+    padding: 6px 14px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(6px);
-    opacity: 0.4;
+    opacity: 0.35;
     animation: float 8s infinite ease-in-out;
   }
 
-  .icon-claude { top: 10%; right: 7%; color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
-  .icon-gemini { top: 22%; left: 5%; color: #3b82f6; border-color: rgba(59, 130, 246, 0.4); animation-delay: 1.5s; }
-  .icon-gpt { top: 68%; right: 8%; color: #10b981; border-color: rgba(16, 185, 129, 0.4); animation-delay: 3s; }
-  .icon-copilot { top: 78%; left: 7%; color: #ec4899; border-color: rgba(236, 72, 153, 0.4); animation-delay: 0.8s; }
-  .icon-cursor { top: 42%; right: 4%; color: #a855f7; border-color: rgba(168, 85, 247, 0.4); animation-delay: 2.2s; }
+  .icon-claude { top: 8%; right: 6%; color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
+  .icon-gemini { top: 20%; left: 4%; color: #3b82f6; border-color: rgba(59, 130, 246, 0.4); animation-delay: 1.5s; }
+  .icon-gpt { top: 72%; right: 6%; color: #10b981; border-color: rgba(16, 185, 129, 0.4); animation-delay: 3s; }
+  .icon-copilot { top: 82%; left: 5%; color: #ec4899; border-color: rgba(236, 72, 153, 0.4); animation-delay: 0.8s; }
+  .icon-cursor { top: 40%; right: 3%; color: #a855f7; border-color: rgba(168, 85, 247, 0.4); animation-delay: 2.2s; }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
+    50% { transform: translateY(-12px); }
   }
 
   .shell {
@@ -94,27 +94,27 @@
     z-index: 1;
   }
 
+  /* Compact Header */
   header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 0.8rem;
-    padding: 2rem 0 1rem;
+    gap: 1.2rem;
+    padding: 1.2rem 0 0.8rem;
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
   .logo {
     flex-shrink: 0;
-    width: 72px;
-    height: 72px;
-    border-radius: 20px;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--surface);
     border: 2px solid transparent;
     background: linear-gradient(var(--bg), var(--bg)) padding-box,
                 linear-gradient(135deg, #00f2fe, #a855f7, #ec4899) border-box;
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.3);
   }
 
   .logo img {
@@ -125,9 +125,9 @@
   }
 
   .header-text h1 {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 900;
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.2rem;
     background: linear-gradient(135deg, #00f2fe, #a855f7, #ec4899);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -137,65 +137,70 @@
   .header-text p {
     margin: 0;
     color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    max-width: 650px;
+    font-size: 0.92rem;
+    line-height: 1.4;
   }
 
+  /* Horizontal Single-Row Scrolling Chips */
   .chips {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    padding: 1.5rem 0;
-    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.7rem;
+    padding: 0.8rem 0;
+    flex-shrink: 0;
+    scrollbar-width: none; /* Firefox */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chips::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
   }
 
   .chip {
+    flex-shrink: 0;
+    white-space: nowrap;
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: #ffffff;
     background: rgba(15, 23, 42, 0.6);
     border: 1.5px solid rgba(255, 255, 255, 0.15);
-    border-radius: 30px;
-    padding: 0.65rem 1.25rem;
+    border-radius: 25px;
+    padding: 0.5rem 1.1rem;
     cursor: pointer;
     text-align: right;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.25s ease;
     line-height: 1.4;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   }
 
-  /* Soap Bubble Glowing Colors for Chips */
+  /* Soap-Bubble Colors for Chips */
   .chip:nth-child(1) { border-color: rgba(0, 242, 254, 0.5); background: rgba(0, 242, 254, 0.12); }
-  .chip:nth-child(1):hover { background: rgba(0, 242, 254, 0.25); box-shadow: 0 0 25px rgba(0, 242, 254, 0.5); }
+  .chip:nth-child(1):hover { background: rgba(0, 242, 254, 0.25); box-shadow: 0 0 18px rgba(0, 242, 254, 0.4); }
 
   .chip:nth-child(2) { border-color: rgba(168, 85, 247, 0.5); background: rgba(168, 85, 247, 0.12); }
-  .chip:nth-child(2):hover { background: rgba(168, 85, 247, 0.25); box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); }
+  .chip:nth-child(2):hover { background: rgba(168, 85, 247, 0.25); box-shadow: 0 0 18px rgba(168, 85, 247, 0.4); }
 
   .chip:nth-child(3) { border-color: rgba(16, 185, 129, 0.5); background: rgba(16, 185, 129, 0.12); }
-  .chip:nth-child(3):hover { background: rgba(16, 185, 129, 0.25); box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
+  .chip:nth-child(3):hover { background: rgba(16, 185, 129, 0.25); box-shadow: 0 0 18px rgba(16, 185, 129, 0.4); }
 
   .chip:nth-child(4) { border-color: rgba(236, 72, 153, 0.5); background: rgba(236, 72, 153, 0.12); }
-  .chip:nth-child(4):hover { background: rgba(236, 72, 153, 0.25); box-shadow: 0 0 25px rgba(236, 72, 153, 0.5); }
+  .chip:nth-child(4):hover { background: rgba(236, 72, 153, 0.25); box-shadow: 0 0 18px rgba(236, 72, 153, 0.4); }
 
   .chip:nth-child(5) { border-color: rgba(245, 158, 11, 0.5); background: rgba(245, 158, 11, 0.12); }
-  .chip:nth-child(5):hover { background: rgba(245, 158, 11, 0.25); box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); }
+  .chip:nth-child(5):hover { background: rgba(245, 158, 11, 0.25); box-shadow: 0 0 18px rgba(245, 158, 11, 0.4); }
 
   .chip:nth-child(6) { border-color: rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.12); }
-  .chip:nth-child(6):hover { background: rgba(59, 130, 246, 0.25); box-shadow: 0 0 25px rgba(59, 130, 246, 0.5); }
+  .chip:nth-child(6):hover { background: rgba(59, 130, 246, 0.25); box-shadow: 0 0 18px rgba(59, 130, 246, 0.4); }
 
   .chip:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px);
     color: #ffffff;
   }
 
-  .chip:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
+  /* Full Viewport Chat Container */
   main {
     flex: 1;
     overflow-y: auto;
@@ -212,26 +217,28 @@
     background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(168, 85, 247, 0.2));
     color: #ffffff;
     border: 1px solid rgba(0, 242, 254, 0.4);
-    border-radius: 20px 20px 4px 20px;
-    padding: 0.85rem 1.3rem;
+    border-radius: 18px 18px 4px 18px;
+    padding: 0.8rem 1.2rem;
     max-width: 85%;
-    font-size: 1rem;
+    font-size: 0.98rem;
     white-space: pre-wrap;
     word-wrap: break-word;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(12px);
   }
 
   .msg.assistant {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 20px 20px 20px 4px;
+    border-radius: 18px 18px 18px 4px;
     padding: 1.2rem 1.5rem;
     font-size: 1.02rem;
     line-height: 1.7;
     animation: fade-in 0.3s ease;
     backdrop-filter: blur(16px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   .msg.assistant p {
@@ -302,9 +309,10 @@
     display: flex;
     gap: 0.8rem;
     align-items: center;
-    padding: 1rem 0 1.2rem;
+    padding: 0.8rem 0 1rem;
     border-top: 1px solid var(--border);
     background: transparent;
+    flex-shrink: 0;
   }
 
   textarea {
@@ -316,10 +324,10 @@
     color: var(--text);
     background: rgba(15, 23, 42, 0.85);
     border: 1.5px solid rgba(0, 242, 254, 0.3);
-    border-radius: 30px;
-    padding: 0.75rem 1.3rem;
+    border-radius: 28px;
+    padding: 0.7rem 1.2rem;
     max-height: 8.5rem;
-    min-height: 3.1rem;
+    min-height: 3rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(16px);
   }
@@ -333,14 +341,14 @@
   button[type="submit"] {
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.98rem;
     color: #ffffff;
     background: linear-gradient(135deg, #00f2fe, #a855f7, #ec4899);
     border: none;
-    border-radius: 30px;
-    padding: 0.75rem 1.6rem;
+    border-radius: 28px;
+    padding: 0.7rem 1.5rem;
     cursor: pointer;
-    height: 3.1rem;
+    height: 3rem;
     box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
     transition: all 0.3s ease;
   }
@@ -366,17 +374,18 @@
     text-align: center;
     color: var(--text-tertiary);
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    padding-bottom: 0.8rem;
+    font-size: 0.72rem;
+    padding-bottom: 0.6rem;
+    flex-shrink: 0;
   }
 
   @media (max-width: 480px) {
-    .shell { padding: 0 0.9rem; }
-    .logo { width: 60px; height: 60px; }
-    .header-text h1 { font-size: 1.7rem; }
+    .shell { padding: 0 0.8rem; }
+    header { gap: 0.8rem; }
+    .logo { width: 44px; height: 44px; }
+    .header-text h1 { font-size: 1.35rem; }
+    .header-text p { font-size: 0.82rem; }
     .msg.user { max-width: 92%; }
-    .chips { gap: 0.6rem; }
-    .chip { font-size: 0.82rem; padding: 0.55rem 0.95rem; }
   }
 </style>
 </head>
@@ -394,11 +403,11 @@
   <div class="shell">
     <header>
       <div class="logo">
-        <img src="/logo.jpg" alt="חנה" width="72" height="72">
+        <img src="/logo.jpg" alt="חנה" width="54" height="54">
       </div>
       <div class="header-text">
         <h1>היי, אני קולגת ה-AI של חנה</h1>
-        <p>אני מבוסס על איסוף דאטה ומקרי בוחן אמיתיים מעבודת ה-AI של חנה בשנה וחצי האחרונות. שאלו אותי כל דבר.</p>
+        <p>אני מבוסס על איסוף דאטה ומקרי בוחן מעבודת ה-AI של חנה בשנה וחצי האחרונות. שאלו אותי כל דבר.</p>
       </div>
     </header>
 
