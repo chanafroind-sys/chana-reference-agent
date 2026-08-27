@@ -19,7 +19,7 @@ export const maxDuration = 60;
 const MODEL = "claude-sonnet-5";
 // Hebrew runs ~2-3 tokens/word in this tokenizer vs ~1.3 for English; 700 was reasoned in
 // English and was cutting off real answers (especially the longer depth-question cases).
-const MAX_TOKENS = 2000;
+const MAX_TOKENS = 4000;
 const MAX_QUESTION_LENGTH = 600;
 const MAX_HISTORY_TURNS = 8;
 const HOURLY_LIMIT_PER_IP = 10;

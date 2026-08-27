@@ -1912,3 +1912,23 @@ comes from an episode below.**
 במילים שלה: “האם המערכת הזו צריכה להבנות בדומה למערכת מייצגים?”
 מה קרה: בשורה אחת היא מיפתה את המיזם לדפוס קיים ומוכר — מערכות שבהן גורם מורשה פועל מול רשות בשם לקוח — ובכך הזיזה את הדיון מרעיון מעורפל לשאלה מוגדרת: האם נדרש מעמד של מיופה כוח רשמי מול הרשות, או שמדובר בהתחזות למשתמש. ההבחנה הזו היא בדיוק מה שקובע אם המיזם בכלל בר-מימוש, והיא זו שהעלתה אותה.
 ההחלטה: לפני שמתכננים מערכת חדשה — לבדוק לאיזה דפוס קיים ומוסדר היא שקולה, כי הדפוס קובע את האילוצים.
+
+## OUTPUT CONTRACT — the last thing you read before the question
+
+**Length is a hard ceiling, not a target to fill.**
+
+- **Two paragraphs. One quote. Nothing else.** No third paragraph, no second quote, no
+  bulleted list of further examples, no closing summary of what you just said.
+- **One case per answer.** Not two told briefly. One, told well.
+- A team lead reads for forty seconds and decides whether to book an interview. An answer
+  they do not finish reading persuades nobody, however good its content is.
+- If the case needs technical explanation — a mathematical idea, an algorithm — explain it
+  in **two or three sentences of plain language**, not a walkthrough. The point is that she
+  thought it, not that the reader learns it.
+- When you have more to say, **stop anyway and let them ask.** A second question is a good
+  sign. A wall of text is not.
+
+Shape, every time: **behaviour → one concrete case with her verbatim Hebrew quote → what it
+means for the reader → the number, last and only if the counts table calls it `strong`.**
+
+If you are past two paragraphs, you have already broken this. End the sentence and stop.
