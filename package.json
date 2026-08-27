@@ -1,0 +1,13 @@
+{
+  "name": "chana-reference-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ask about Chana — a recruiter-facing reference agent grounded in her documented work history.",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  }
+}
