@@ -3,42 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>שאלו על חנה</title>
+<title>הקולגה הדיגיטלית של חנה | AI Agent</title>
 <meta name="description" content="223 מקרים מתועדים מעבודה אמיתית של חנה פרוינד. שאלו כל דבר.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Assistant:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Assistant:wght@400;600;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F8F9;
-    --surface: #FFFFFF;
-    --text: #1B2126;
-    --text-secondary: #4B555F;
-    --text-tertiary: #818C96;
-    --border: #DEE3E8;
-    --accent: #8A6216;
-    --accent-soft: rgba(138, 98, 22, 0.10);
-    --error: #B3261E;
-    --error-soft: rgba(179, 38, 30, 0.08);
+    --bg: #070913;
+    --surface: rgba(15, 23, 42, 0.75);
+    --text: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #64748b;
+    --border: rgba(255, 255, 255, 0.12);
+    --accent: #00f2fe;
+    --accent-soft: rgba(0, 242, 254, 0.12);
+    --error: #ef4444;
+    --error-soft: rgba(239, 68, 68, 0.15);
 
     --font-header: "Frank Ruhl Libre", Georgia, "Times New Roman", serif;
     --font-body: "Assistant", -apple-system, "Segoe UI", Arial, sans-serif;
     --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #15181B;
-      --surface: #1D2124;
-      --text: #E7E9EA;
-      --text-secondary: #AEB6BC;
-      --text-tertiary: #7C858C;
-      --border: #2B3136;
-      --accent: #C99A4A;
-      --accent-soft: rgba(201, 154, 74, 0.14);
-      --error: #E5786A;
-      --error-soft: rgba(229, 120, 106, 0.10);
-    }
   }
 
   * { box-sizing: border-box; }
@@ -58,64 +43,163 @@
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
+    position: relative;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.22) 0%, transparent 45%),
+      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.18) 0%, transparent 45%),
+      radial-gradient(circle at 50% 30%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+  }
+
+  /* Background Floating AI Icons */
+  .bg-icons {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ai-badge {
+    position: absolute;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    opacity: 0.4;
+    animation: float 8s infinite ease-in-out;
+  }
+
+  .icon-claude { top: 10%; right: 7%; color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
+  .icon-gemini { top: 22%; left: 5%; color: #3b82f6; border-color: rgba(59, 130, 246, 0.4); animation-delay: 1.5s; }
+  .icon-gpt { top: 68%; right: 8%; color: #10b981; border-color: rgba(16, 185, 129, 0.4); animation-delay: 3s; }
+  .icon-copilot { top: 78%; left: 7%; color: #ec4899; border-color: rgba(236, 72, 153, 0.4); animation-delay: 0.8s; }
+  .icon-cursor { top: 42%; right: 4%; color: #a855f7; border-color: rgba(168, 85, 247, 0.4); animation-delay: 2.2s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
   }
 
   .shell {
     width: 100%;
-    max-width: 720px;
+    max-width: 850px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
-    padding: 0 1rem;
+    padding: 0 1.2rem;
+    z-index: 1;
   }
 
   header {
-    padding: 1.75rem 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+    padding: 2rem 0 1rem;
     border-bottom: 1px solid var(--border);
   }
 
-  header h1 {
-    font-family: var(--font-header);
+  .logo {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                linear-gradient(135deg, #00f2fe, #a855f7, #ec4899) border-box;
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .header-text h1 {
+    font-size: 2.2rem;
     font-weight: 900;
-    font-size: 1.6rem;
     margin: 0 0 0.4rem;
+    background: linear-gradient(135deg, #00f2fe, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     letter-spacing: -0.01em;
   }
 
-  header p {
+  .header-text p {
     margin: 0;
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 650px;
   }
 
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 1rem 0;
+    gap: 0.8rem;
+    padding: 1.5rem 0;
+    justify-content: center;
   }
 
   .chip {
     font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 0.65rem 1.25rem;
     cursor: pointer;
     text-align: right;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    line-height: 1.4;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 
-  .chip:hover { border-color: var(--accent); color: var(--text); }
-  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* Soap Bubble Glowing Colors for Chips */
+  .chip:nth-child(1) { border-color: rgba(0, 242, 254, 0.5); background: rgba(0, 242, 254, 0.12); }
+  .chip:nth-child(1):hover { background: rgba(0, 242, 254, 0.25); box-shadow: 0 0 25px rgba(0, 242, 254, 0.5); }
+
+  .chip:nth-child(2) { border-color: rgba(168, 85, 247, 0.5); background: rgba(168, 85, 247, 0.12); }
+  .chip:nth-child(2):hover { background: rgba(168, 85, 247, 0.25); box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); }
+
+  .chip:nth-child(3) { border-color: rgba(16, 185, 129, 0.5); background: rgba(16, 185, 129, 0.12); }
+  .chip:nth-child(3):hover { background: rgba(16, 185, 129, 0.25); box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
+
+  .chip:nth-child(4) { border-color: rgba(236, 72, 153, 0.5); background: rgba(236, 72, 153, 0.12); }
+  .chip:nth-child(4):hover { background: rgba(236, 72, 153, 0.25); box-shadow: 0 0 25px rgba(236, 72, 153, 0.5); }
+
+  .chip:nth-child(5) { border-color: rgba(245, 158, 11, 0.5); background: rgba(245, 158, 11, 0.12); }
+  .chip:nth-child(5):hover { background: rgba(245, 158, 11, 0.25); box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); }
+
+  .chip:nth-child(6) { border-color: rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.12); }
+  .chip:nth-child(6):hover { background: rgba(59, 130, 246, 0.25); box-shadow: 0 0 25px rgba(59, 130, 246, 0.5); }
+
+  .chip:hover {
+    transform: translateY(-3px) scale(1.02);
+    color: #ffffff;
+  }
+
+  .chip:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   main {
     flex: 1;
     overflow-y: auto;
-    padding: 0.5rem 0 1rem;
+    padding: 0.5rem 0 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -125,23 +209,35 @@
 
   .msg.user {
     align-self: flex-end;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(168, 85, 247, 0.2));
+    color: #ffffff;
+    border: 1px solid rgba(0, 242, 254, 0.4);
+    border-radius: 20px 20px 4px 20px;
+    padding: 0.85rem 1.3rem;
     max-width: 85%;
-    font-size: 0.95rem;
+    font-size: 1rem;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
   }
 
   .msg.assistant {
-    font-size: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px 20px 20px 4px;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.02rem;
+    line-height: 1.7;
     animation: fade-in 0.3s ease;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
 
   .msg.assistant p {
-    margin: 0 0 0.85rem;
+    margin: 0 0 1rem;
     white-space: pre-wrap;
+    word-wrap: break-word;
   }
 
   .msg.assistant p:last-child { margin-bottom: 0; }
@@ -150,39 +246,42 @@
     color: var(--error);
     background: var(--error-soft);
     border: 1px solid var(--error);
-    border-radius: 10px;
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+    border-radius: 14px;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
     align-self: stretch;
   }
 
   .quote {
-    border-inline-start: 3px solid var(--accent);
+    border-inline-start: 4px solid var(--accent);
     background: var(--accent-soft);
-    padding: 0.85rem 1.15rem;
-    margin: 0.9rem 0;
-    font-size: 1.08em;
-    border-radius: 2px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 1.05em;
+    line-height: 1.7;
+    border-radius: 8px;
+    font-style: italic;
   }
 
   .inline-quote { color: var(--accent); font-weight: 600; }
 
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(4px); }
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .typing {
     display: flex;
-    gap: 0.3rem;
-    padding: 0.3rem 0;
+    gap: 0.4rem;
+    padding: 0.6rem 0.5rem;
   }
 
   .typing span {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: var(--text-tertiary);
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
     animation: bounce 1.2s infinite ease-in-out;
   }
 
@@ -190,8 +289,8 @@
   .typing span:nth-child(3) { animation-delay: 0.3s; }
 
   @keyframes bounce {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-    30% { transform: translateY(-4px); opacity: 1; }
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -201,74 +300,114 @@
 
   form {
     display: flex;
-    gap: 0.6rem;
-    align-items: flex-end;
-    padding: 0.9rem 0 1.1rem;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 1rem 0 1.2rem;
     border-top: 1px solid var(--border);
-    background: var(--bg);
+    background: transparent;
   }
 
   textarea {
     flex: 1;
     resize: none;
     font-family: var(--font-body);
-    font-size: 0.98rem;
+    font-size: 1.02rem;
     line-height: 1.5;
     color: var(--text);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0.65rem 0.9rem;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1.5px solid rgba(0, 242, 254, 0.3);
+    border-radius: 30px;
+    padding: 0.75rem 1.3rem;
     max-height: 8.5rem;
-    min-height: 2.7rem;
+    min-height: 3.1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
   }
 
   textarea:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.35);
   }
 
   button[type="submit"] {
     font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: #fff;
-    background: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00f2fe, #a855f7, #ec4899);
     border: none;
-    border-radius: 12px;
-    padding: 0.65rem 1.2rem;
+    border-radius: 30px;
+    padding: 0.75rem 1.6rem;
     cursor: pointer;
-    height: 2.7rem;
+    height: 3.1rem;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    transition: all 0.3s ease;
   }
 
-  button[type="submit"]:disabled { opacity: 0.5; cursor: default; }
-  button[type="submit"]:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+  button[type="submit"]:hover {
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+    transform: scale(1.04);
+  }
+
+  button[type="submit"]:disabled {
+    opacity: 0.4;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
+
+  button[type="submit"]:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+  }
 
   .hint {
     text-align: center;
     color: var(--text-tertiary);
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    padding-bottom: 0.75rem;
+    font-size: 0.75rem;
+    padding-bottom: 0.8rem;
   }
 
   @media (max-width: 480px) {
-    header h1 { font-size: 1.35rem; }
+    .shell { padding: 0 0.9rem; }
+    .logo { width: 60px; height: 60px; }
+    .header-text h1 { font-size: 1.7rem; }
     .msg.user { max-width: 92%; }
+    .chips { gap: 0.6rem; }
+    .chip { font-size: 0.82rem; padding: 0.55rem 0.95rem; }
   }
 </style>
 </head>
 <body>
+
+  <!-- Floating Background AI Badges -->
+  <div class="bg-icons">
+    <div class="ai-badge icon-claude">✦ Claude</div>
+    <div class="ai-badge icon-gemini">❖ Gemini</div>
+    <div class="ai-badge icon-gpt">⎔ ChatGPT</div>
+    <div class="ai-badge icon-copilot">◈ Copilot</div>
+    <div class="ai-badge icon-cursor">⚡ Cursor</div>
+  </div>
+
   <div class="shell">
     <header>
-      <h1>שאלו על חנה</h1>
-      <p>223 מקרים מתועדים מעבודה אמיתית. שאלו כל דבר — התשובות מגיעות עם ציטוט.</p>
+      <div class="logo">
+        <img src="/logo.jpg" alt="חנה" width="72" height="72">
+      </div>
+      <div class="header-text">
+        <h1>היי, אני קולגת ה-AI של חנה</h1>
+        <p>אני מבוסס על איסוף דאטה ומקרי בוחן אמיתיים מעבודת ה-AI של חנה בשנה וחצי האחרונות. שאלו אותי כל דבר.</p>
+      </div>
     </header>
 
     <div class="chips" id="chips">
       <button class="chip" type="button">איך היא מתמודדת עם באג שלא מובן?</button>
       <button class="chip" type="button">כמה עמוק היא באמת חושבת? תן לי את הרגע הכי אינטלקטואלי.</button>
-      <button class="chip" type="button">אני צוות של חמישה בלי QA — היא תשרוד?</button>
+      <button class="chip" type="button">איך היא מתקרבת לעיצוב ארכיטקטורה של מערכת?</button>
+      <button class="chip" type="button">היא עבדה עם AI agents — איך היא מתמודדת עם אי-ודאות?</button>
+      <button class="chip" type="button">מה הגישה שלה לבעיות performance?</button>
       <button class="chip" type="button">מה החולשות שלה?</button>
     </div>
 
