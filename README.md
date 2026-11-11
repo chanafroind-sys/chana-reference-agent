@@ -20,7 +20,7 @@
 Ask anything about how Chana works. Answers are anchored in documented cases from her real work, and they are built around her own words, quoted verbatim in Hebrew.
 
 - **289 documented cases**, of which the strongest **223** are loaded into the agent
-- **No retrieval, no guessing**: the full corpus is in context on every request
+- **No retrieval, no guessing**: the whole loaded corpus is in context on every request
 - **Quotes, not paraphrase**: her actual words are the evidence
 - **Safe on a public link**: rate limits, spend caps, length caps, no leaked internals
 
@@ -28,11 +28,27 @@ Ask anything about how Chana works. Answers are anchored in documented cases fro
 
 ---
 
+## From 1.5 years of conversations to a corpus
+
+The knowledge base was not written by hand. It was mined from a year and a half of real working conversations with AI.
+
+```mermaid
+flowchart LR
+    A[1.5 years of working<br/>conversations with AI] --> B[AI-assisted mining<br/>into documented cases]
+    B --> C[Full corpus<br/>289 documented cases]
+    C --> D[Strongest 223<br/>under a fixed token budget]
+    D --> E[Sent verbatim on<br/>every request, cached]
+```
+
+Each documented case records what happened, her own words in Hebrew, and the decision she made. The full corpus is regenerated periodically, and the loaded subset is rebuilt under the same token budget, so it can change but never grows.
+
+---
+
 ## Problems → solutions
 
 | The problem | What was done about it |
 |---|---|
-| Retrieval-based answers (RAG) broke badly on a hosted platform | Retrieval was dropped entirely. The whole corpus (~147K tokens) goes into one cached system block, verbatim. No vector DB, no embeddings, no framework. |
+| Should this be a RAG system? | No. The strongest 223 cases fit in the model's context (~147K tokens), so the whole corpus goes into one cached system block, verbatim. No vector DB, no embeddings, no retrieval step that can pick the wrong case. |
 | Sending ~147K tokens on every question sounds expensive | Prompt caching with a 1-hour TTL. A cached question costs about a tenth of the input price (see [Cost](#cost)). |
 | A cache that silently misses means full price every time | The system blocks are byte-identical on every request: no timestamps, session IDs or names are interpolated. Production logs show `cache_read=146684` on repeat requests. |
 | A blank chat box gets no questions | Four suggested-question chips on first load, covering different technical angles. |
